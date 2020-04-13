@@ -31,7 +31,7 @@ const followersArray = [
   'dustinmyers',
   'justsml',
   'luishrd',
-  'bigknell]'
+  'bigknell'
 ];
 
 /* Step 3: Create a function that accepts a single object as its only argument,
@@ -67,27 +67,30 @@ function userCardMaker(arr) {
   const followersTally = document.createElement('p');
   const followingTally = document.createElement('p');
   const bio = document.createElement('p');
+
+  // Structure
+  cardDiv.appendChild(userImg);
+  cardDiv.appendChild(cardInfoDiv);
+  cardInfoDiv.appendChild(name);
+  cardInfoDiv.appendChild(userName);
+  cardInfoDiv.appendChild(location);
+  cardInfoDiv.appendChild(profile);
+  profile.appendChild(userGitHubPage);
+  cardInfoDiv.appendChild(followersTally);
+  cardInfoDiv.appendChild(followingTally);
+  cardInfoDiv.appendChild(bio);
+
+  // Classes
+  articleDiv.classList.add('card');
+  cardInfoDiv.classList.add('card-info');
+  name.classList.add('name');
+  userName.classList.add('username');
+
+  // Content
+
+
+  return cardDiv;
 };
-
-// Structure
-cardDiv.appendChild(userImg);
-cardDiv.appendChild(cardInfoDiv);
-cardInfoDiv.appendChild(name);
-cardInfoDiv.appendChild(userName);
-cardInfoDiv.appendChild(location);
-cardInfoDiv.appendChild(profile);
-profile.appendChild(userGitHubPage);
-cardInfoDiv.appendChild(followersTally);
-cardInfoDiv.appendChild(followingTally);
-cardInfoDiv.appendChild(bio);
-
-// Classes
-articleDiv.classList.add('card');
-cardInfoDiv.classList.add('card-info');
-name.classList.add('name');
-userName.classList.add('username');
-
-// Content
 
 
 /* List of LS Instructors Github username's: 
