@@ -3,7 +3,7 @@
            https://api.github.com/users/<your name>
 */
 
-console.log(axios.get('https://api.github.com/users/Patrick-G-Oliver'));
+//console.log(axios.get('https://api.github.com/users/Patrick-G-Oliver'));
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -54,7 +54,7 @@ const followersArray = [
 
 */
 
-function userCardMaker(arr) {
+function userCardMaker(userObj) {
   // Elements
   const cardDiv = document.createElement('div');
   const userImg = document.createElement('img');
@@ -81,17 +81,42 @@ function userCardMaker(arr) {
   cardInfoDiv.appendChild(bio);
 
   // Classes
-  articleDiv.classList.add('card');
+  cardDiv.classList.add('card');
   cardInfoDiv.classList.add('card-info');
   name.classList.add('name');
   userName.classList.add('username');
 
   // Content
-
+  //userImg.setAttribute('src', 'https://avatars3.githubusercontent.com/u/50932843?v=4');
+  userImg.src = 'https://avatars3.githubusercontent.com/u/50932843?v=4';
+  name.textContent = userObj.name;
+  userName.textContent = userObj.login;
+  location.textContent = `Location: ${userObj.location}`;
+  profile.textContent = 'Profile: ';
+  userGitHubPage.setAttribute('href', userOjb.url);
+  userGitHubPage.textConent = userObj.url;
+  followersTally.textContent = userObj.followers;
+  followingTally.textContent = userObj.following;
+  bio.textContent = `Bio ${userObj.bio}`;
 
   return cardDiv;
 };
 
+const cards = document.querySelector('.cards');
+
+axios.get('https://api.github.com/users/Patrick-G-Oliver')
+.then(response => {
+
+  console.log('response', response.data)
+
+  response.data.forEach(dataObj => {
+    const userInfo = userCardMaker(dataObj)
+    cards.appendChild(userInfo)
+  })
+})
+.catch(err => {
+  console.log('Something happened!')
+})
 
 /* List of LS Instructors Github username's: 
   tetondan
