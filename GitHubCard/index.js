@@ -115,7 +115,7 @@ axios.get('https://api.github.com/users/Patrick-G-Oliver')
   })
 })
 .catch(err => {
-  console.log('Something happened!')
+  console.log('Something happened!') 
 })
 
 /* List of LS Instructors Github username's: 
