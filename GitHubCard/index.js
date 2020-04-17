@@ -129,10 +129,13 @@ const friendsArray = [
 friendsArray.forEach( (nameDatum) => {
   axios.get(`https://api.github.com/users/${nameDatum}`)
   .then( (response) => {
+    
     console.log('friend response', response.data)
     const friendData = response.data
     const friendInfo = userCardMaker(friendData)
     cards.appendChild(friendInfo)
+    
+    //cards.appendChild(userCardMaker(response.data))
   })
  .catch(err => {
    console.log('Something else is wrong!', err)
