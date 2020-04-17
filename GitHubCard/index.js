@@ -60,18 +60,6 @@ function userCardMaker(userObj) {
   const followingTally = document.createElement('p');
   const bio = document.createElement('p');
 
-  // Structure
-  cardDiv.appendChild(userImg);
-  cardDiv.appendChild(cardInfoDiv);
-  cardInfoDiv.appendChild(name);
-  cardInfoDiv.appendChild(userName);
-  cardInfoDiv.appendChild(location);
-  cardInfoDiv.appendChild(profile);
-  profile.appendChild(userGitHubPage);
-  cardInfoDiv.appendChild(followersTally);
-  cardInfoDiv.appendChild(followingTally);
-  cardInfoDiv.appendChild(bio);
-
   // Classes
   cardDiv.classList.add('card');
   cardInfoDiv.classList.add('card-info');
@@ -84,13 +72,24 @@ function userCardMaker(userObj) {
   userName.textContent = userObj.login;
   location.textContent = `Location: ${userObj.location}`;
   profile.textContent = 'Profile: ';
-  userGitHubPage.textContent = `${userObj.url}`;
-  //userGitHubPage.setAttribute('href', userObj.url);
-  userGitHubPage.href = userObj.url;
-  userGitHubPage.textConent = userObj.url;
+  userGitHubPage.textContent = `${userObj.html_url}`;
+  userGitHubPage.href = `${userObj.html_url}`;
+  userGitHubPage.textConent = userObj.html_url;
   followersTally.textContent = `Followers: ${userObj.followers}`;
   followingTally.textContent = `Following: ${userObj.following}`;
   bio.textContent = `Bio ${userObj.bio}`;
+
+  // Structure
+  cardDiv.appendChild(userImg);
+  cardDiv.appendChild(cardInfoDiv);
+  cardInfoDiv.appendChild(name);
+  cardInfoDiv.appendChild(userName);
+  cardInfoDiv.appendChild(location);
+  cardInfoDiv.appendChild(profile);
+  profile.appendChild(userGitHubPage);
+  cardInfoDiv.appendChild(followersTally);
+  cardInfoDiv.appendChild(followingTally);
+  cardInfoDiv.appendChild(bio);
 
   return cardDiv;
 };
@@ -110,15 +109,8 @@ axios.get('https://api.github.com/users/Patrick-G-Oliver')
 
 // Step 4: Pass the data received from Github into your function,
 // create a new component, and add it to the DOM as a child of .cards
-
-// To pass the recieved data to the function:
-  const userData = response.data
-// To create the new component:
-  const userInfo = userCardMaker(userData)
-
-  // To add components to screen (i.e. the DOM):
-  cards.appendChild(userInfo)
-  })
+ cards.appendChild(userCardMaker(response.data))
+})
 // To handle errors in the receipt of data from the server:
 .catch(err => {
   console.log('Something\'s wrong!', err) 
