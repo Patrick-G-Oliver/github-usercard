@@ -84,6 +84,8 @@ function userCardMaker(userObj) {
   userName.textContent = userObj.login;
   location.textContent = `Location: ${userObj.location}`;
   profile.textContent = 'Profile: ';
+  userGitHubPage.textContent = `${userObj.url}`;
+  //userGitHubPage.setAttribute('href', userObj.url);
   userGitHubPage.href = userObj.url;
   userGitHubPage.textConent = userObj.url;
   followersTally.textContent = `Followers: ${userObj.followers}`;
