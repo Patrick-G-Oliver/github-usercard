@@ -26,14 +26,6 @@
           user, and adding that card to the DOM.
 */
 
-const followersArray = [
-  'tetondan', 
-  'dustinmyers',
-  'justsml',
-  'luishrd',
-  'bigknell'
-];
-
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
 
@@ -53,7 +45,7 @@ const followersArray = [
 </div>
 
 */
-
+// Step 3: Create a function that accepts a single object as its only argument. (see above)
 function userCardMaker(userObj) {
   // Elements
   const cardDiv = document.createElement('div');
@@ -87,37 +79,75 @@ function userCardMaker(userObj) {
   userName.classList.add('username');
 
   // Content
-  //userImg.setAttribute('src', 'https://avatars3.githubusercontent.com/u/50932843?v=4');
   userImg.src = 'https://avatars3.githubusercontent.com/u/50932843?v=4';
   name.textContent = userObj.name;
   userName.textContent = userObj.login;
   location.textContent = `Location: ${userObj.location}`;
   profile.textContent = 'Profile: ';
-  userGitHubPage.setAttribute('href', userOjb.url);
+  userGitHubPage.href = userObj.url;
   userGitHubPage.textConent = userObj.url;
-  followersTally.textContent = userObj.followers;
-  followingTally.textContent = userObj.following;
+  followersTally.textContent = `Followers: ${userObj.followers}`;
+  followingTally.textContent = `Following: ${userObj.following}`;
   bio.textContent = `Bio ${userObj.bio}`;
 
   return cardDiv;
 };
 
+// Where to place the components (once created):
 const cards = document.querySelector('.cards');
 
+// Step 1: Using axios, send a GET request (see above).
+// Step 2: Inspect and study the data coming back (see above).
 axios.get('https://api.github.com/users/Patrick-G-Oliver')
-.then(response => {
 
+// To handle successful transfer/recept of data from the server:
+.then( (response) => {
+
+// To render the data visible in the console:
   console.log('response', response.data)
 
-  response.data.forEach(dataObj => {
-    const userInfo = userCardMaker(dataObj)
-    cards.appendChild(userInfo)
-  })
-})
-.catch(err => {
-  console.log('Something happened!') 
-})
+// Step 4: Pass the data received from Github into your function,
+// create a new component, and add it to the DOM as a child of .cards
 
+// To pass the recieved data to the function:
+  const userData = response.data
+// To create the new component:
+  const userInfo = userCardMaker(userData)
+
+  // To add components to screen (i.e. the DOM):
+  cards.appendChild(userInfo)
+  })
+// To handle errors in the receipt of data from the server:
+.catch(err => {
+  console.log('Something\'s wrong!', err) 
+});
+
+// Step 5: Get at least 5 different Github usernames and add them as individual strings to the friendsArray below. Using that array, iterate over it, requesting data for each user, creating a new card for each user, and adding that card to the DOM.(see above)
+
+const friendsArray = [
+  'tetondan', 
+  'dustinmyers',
+  'justsml',
+  'luishrd',
+  'bigknell'
+];
+/*
+axios.get(`https://api.github.com/users/${nameData}`)
+.then(response => {
+  console.log('response', response.data)
+  const userData = response.data
+  const userInfo = userCardMaker(userData)
+  cards.appendChild(userInfo)
+  })
+.catch(err => {
+  console.log('Something\'s wrong!', err) 
+});
+/////////////
+friendsArray.forEach( (nameDatum) => {
+  axios.get(`https://api.github.com/users/${nameDatum}`)
+  .then(response)
+}); 
+*/
 /* List of LS Instructors Github username's: 
   tetondan
   dustinmyers
