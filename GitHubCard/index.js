@@ -67,7 +67,8 @@ function userCardMaker(userObj) {
   userName.classList.add('username');
 
   // Content
-  userImg.src = 'https://avatars3.githubusercontent.com/u/50932843?v=4';
+  //userImg.src = 'https://avatars3.githubusercontent.com/u/50932843?v=4';
+  userImg.src = `${userObj.avatar_url}`;
   name.textContent = userObj.name;
   userName.textContent = userObj.login;
   location.textContent = `Location: ${userObj.location}`;
