@@ -131,23 +131,20 @@ const friendsArray = [
   'luishrd',
   'bigknell'
 ];
-/*
-axios.get(`https://api.github.com/users/${nameData}`)
-.then(response => {
-  console.log('response', response.data)
-  const userData = response.data
-  const userInfo = userCardMaker(userData)
-  cards.appendChild(userInfo)
-  })
-.catch(err => {
-  console.log('Something\'s wrong!', err) 
-});
-/////////////
+
 friendsArray.forEach( (nameDatum) => {
   axios.get(`https://api.github.com/users/${nameDatum}`)
-  .then(response)
+  .then( (response) => {
+    console.log('friend response', response.data)
+    const friendData = response.data
+    const friendInfo = userCardMaker(friendData)
+    cards.appendChild(friendInfo)
+  })
+ .catch(err => {
+   console.log('Something else is wrong!', err)
+ }) 
 }); 
-*/
+
 /* List of LS Instructors Github username's: 
   tetondan
   dustinmyers
